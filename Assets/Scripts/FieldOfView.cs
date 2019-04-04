@@ -59,4 +59,23 @@ public class FieldOfView : MonoBehaviour
 
         return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), 0);
     }
+
+    public bool FOVDetect() {
+        Collider2D[] targetsInViewRadius = Physics2D.OverlapCircleAll(transform.position, viewRadius, targetMask);
+
+        for (int i = 0; i < targetsInViewRadius.Length; i++) {
+            Transform target = targetsInViewRadius[i].transform;
+            Vector2 dirToTarget = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y);
+            float angle = Vector2.Angle(dirToTarget, transform.up);
+            if (angle < viewAngle / 2) {
+                float dstToTarget = Vector2.Distance(transform.position, target.position);
+
+                if (!Physics2D.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
 }
