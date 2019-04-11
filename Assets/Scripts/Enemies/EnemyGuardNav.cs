@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyGuardNav : MonoBehaviour
 {
-    enum FSMState { Patrol, Chase, Death }
+    enum FSMState { Patrol, Looking, Chase, Death }
 
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private GameObject player;
@@ -13,17 +13,23 @@ public class EnemyGuardNav : MonoBehaviour
     private int patrolIndex = 0;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float chaseRange;
+    [SerializeField] private float stopRange;
 
     private FSMState currentState;
     [SerializeField] private float rotateSpeed;
     [SerializeField] private FieldOfView fov;
     [SerializeField] private EnemyHealth health;
 
+    private Vector2 lastKnownPosition;
+    private bool trackingPlayer;
+    private float stopPointDistance = 1.0f;
+
     // Start is called before the first frame update
     void Start()
     {
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        trackingPlayer = false;
         currentState = FSMState.Patrol;
     }
 
@@ -31,6 +37,7 @@ public class EnemyGuardNav : MonoBehaviour
     void Update()
     {
         float distanceToPlayer = Vector2.Distance(player.transform.position, transform.position);
+        agent.isStopped = false;
 
         switch (currentState) {
             case FSMState.Patrol:
@@ -45,7 +52,17 @@ public class EnemyGuardNav : MonoBehaviour
                     currentState = FSMState.Patrol;
                 }
 
+                if (!fov.FOVDetect()) {
+                    currentState = FSMState.Patrol;
+                } else if (trackingPlayer) {
+                    currentState = FSMState.Looking;
+                    Debug.Log("Looking for player");
+                }
+
                 UpdateChase();
+                break;
+            case FSMState.Looking:
+                LostPlayer();
                 break;
             case FSMState.Death:
                 UpdateDeath();
@@ -54,7 +71,7 @@ public class EnemyGuardNav : MonoBehaviour
     }
 
     void UpdatePatrol() {
-        if (Vector2.Distance(transform.position, patrolPoints[patrolIndex].position) < 1) {
+        if (Vector2.Distance(transform.position, patrolPoints[patrolIndex].position) < stopPointDistance) {
             if (patrolIndex + 1 < patrolPoints.Length) {
                 patrolIndex++;
             } else {
@@ -71,7 +88,14 @@ public class EnemyGuardNav : MonoBehaviour
     void UpdateChase() {
         RotateAgent(player.transform.position);
 
-        agent.destination = player.transform.position;
+        if (Vector2.Distance(transform.position, player.transform.position) < stopRange) {
+            agent.isStopped = true; ;
+        }
+
+        trackingPlayer = true;
+        lastKnownPosition = player.transform.position;
+
+        agent.destination = lastKnownPosition;
     }
 
     void RotateAgent(Vector3 position) {
@@ -93,5 +117,19 @@ public class EnemyGuardNav : MonoBehaviour
 
     void UpdateDeath() {
         Destroy(this.gameObject);
+    }
+
+    void LostPlayer() {
+        if (Vector2.Distance(transform.position, lastKnownPosition) < stopPointDistance) {
+            currentState = FSMState.Patrol;
+            Debug.Log("Back to patrol");
+        }
+
+        if (fov.FOVDetect()) {
+            currentState = FSMState.Chase;
+            Debug.Log("Back to the chase");
+        }
+
+        agent.destination = lastKnownPosition;
     }
 }
