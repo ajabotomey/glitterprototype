@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class GunControl : MonoBehaviour
+public class EnemyGunControl : MonoBehaviour
 {
     [SerializeField]
     private Transform bulletSpawnPoint;
@@ -14,24 +16,21 @@ public class GunControl : MonoBehaviour
     private float elapsedTime;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         elapsedTime = 0.0f;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        //bool fireBullet = Input.GetButtonDown("Fire1");
-        bool fireBullet = Input.GetButton("Fire1");
+    void Update() {
+        elapsedTime += Time.deltaTime;
+    }
 
-        if (fireBullet && elapsedTime >= fireRate) {
+    public void Fire() {
+        if (elapsedTime >= fireRate) {
             GameObject firedBullet = Instantiate(bullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
             firedBullet.GetComponent<Rigidbody2D>().AddForce(transform.up * 500.0f);
 
             elapsedTime = 0.0f;
         }
-
-        elapsedTime += Time.deltaTime;
     }
 }

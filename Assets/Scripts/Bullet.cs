@@ -12,10 +12,9 @@ public class Bullet : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision) {
         rb.velocity = Vector2.zero;
 
-        if (collision.gameObject.tag == "Enemy") {
-            collision.gameObject.GetComponent<EnemyHealth>().ApplyDamage(damage);
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Player") {
+            collision.gameObject.GetComponent<EntityHealth>().ApplyDamage(damage);
         }
-
 
         Destroy(gameObject);
     }

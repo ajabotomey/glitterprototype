@@ -12,6 +12,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField]
     private float speed = 1.0f;
 
+    [SerializeField] private EntityHealth health;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +23,7 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        CheckHealth();
     }
 
     void FixedUpdate() {
@@ -48,5 +50,11 @@ public class PlayerControl : MonoBehaviour
         float posY = transform.position.y + moveVertical * speed * Time.fixedDeltaTime;
 
         rb.MovePosition(new Vector2(posX, posY));
+    }
+
+    void CheckHealth() {
+        if (health.isDead()) {
+            UIController.instance.Died();
+        }
     }
 }
