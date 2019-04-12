@@ -8,7 +8,7 @@ You can find the prototype [here]({{site.baseurl}}/glitterprototype/prototypes/p
 Improvements from Prototype 01 include:
 - Camera now uses Cinemachine. Much nicer camera system and also has a confiner component so I can keep the camera inside the level.
 - AI is slightly smarter. Upon losing the player from the Field of Vision, it will travel to the last known position to attempt to spot the player. 
-..- There is some obvious tuning that is needed. I may still evolve this AI more in the near future.
+    - There is some obvious tuning that is needed. I may still evolve this AI more in the near future.
 - There is some UI menus starting to take shape. They are very basic but they still exist
 
 Current issues include the following: (Will add more as they arise)
