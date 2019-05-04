@@ -22,11 +22,13 @@ public class UIController : MonoBehaviour
 
     public void StartGame() {
         warningFrame.SetActive(false);
+        EnemyController.instance.TurnOnFovVisualisation();
         Time.timeScale = 1f;
     }
 
     public void Died() {
         diedFrame.SetActive(true);
+        EnemyController.instance.TurnOffFovVisualisation();
         Time.timeScale = 0f;
     }
 

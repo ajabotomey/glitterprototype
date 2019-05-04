@@ -8,6 +8,8 @@ public class EnemyController : MonoBehaviour
 {
     public static EnemyController instance;
 
+    [SerializeField] private FieldOfView[] enemies;
+
     [SerializeField] private LayerMask enemyMask;
     public Transform[] deathPoints;
 
@@ -57,5 +59,19 @@ public class EnemyController : MonoBehaviour
     public bool CheckEnemyPositionToSound(Vector2 position)
     {
         return position == SoundPosition;
+    }
+
+    public void TurnOnFovVisualisation()
+    {
+        foreach (var enemy in enemies) {
+            enemy.VisualisationOn = true;
+        }
+    }
+
+    public void TurnOffFovVisualisation()
+    {
+        foreach (var enemy in enemies) {
+            enemy.VisualisationOn = false;
+        }
     }
 }

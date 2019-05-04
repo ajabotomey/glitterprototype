@@ -16,8 +16,13 @@ public class FieldOfView : MonoBehaviour
     public int edgeResolveIterations;
     public float edgeDstThreshold;
 
-    public MeshFilter viewMeshFilter;
-    Mesh viewMesh;
+    [SerializeField] private MeshFilter viewMeshFilter;
+    [SerializeField] private MeshRenderer viewMeshRenderer;
+    private Mesh viewMesh;
+
+    public bool VisualisationOn {
+        get; set;
+    }
 
     public float ViewRadius {
         get { return viewRadius; }
@@ -33,13 +38,20 @@ public class FieldOfView : MonoBehaviour
         viewMesh = new Mesh();
         viewMesh.name = "View Mesh";
         viewMeshFilter.mesh = viewMesh;
+        VisualisationOn = false;
 
         StartCoroutine("FindTargetsWithDelay", .2f);
     }
 
     void LateUpdate()
     {
-        DrawFieldOfView();
+        if (VisualisationOn) {
+            viewMeshRenderer.enabled = true;
+            DrawFieldOfView();
+        } else {
+            viewMeshRenderer.enabled = false;
+        }
+            
     }
 
     IEnumerator FindTargetsWithDelay(float delay) {

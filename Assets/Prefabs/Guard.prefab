@@ -273,7 +273,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 758104b2956579c468b69373981ebfdd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -393,10 +393,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   visibleTargets: []
-  meshResolution: 0
-  edgeResolveIterations: 0
-  edgeDstThreshold: 0
+  meshResolution: 1
+  edgeResolveIterations: 4
+  edgeDstThreshold: 0.5
   viewMeshFilter: {fileID: 8022805804081022527}
+  viewMeshRenderer: {fileID: 2259943912666298513}
 --- !u!114 &316483317315978234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,8 +469,8 @@ MonoBehaviour:
   investigateChaseRange: 0
   stopRange: 2
   rotateSpeed: 180
-  fovRangeInvestigate: 0
-  investigateTimer: 0
+  fovRangeInvestigate: 10
+  investigateTimer: 15
 --- !u!195 &478863962
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -482,7 +483,7 @@ NavMeshAgent:
   m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
-  avoidancePriority: 50
+  avoidancePriority: 90
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
