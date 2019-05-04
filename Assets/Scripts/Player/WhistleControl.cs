@@ -6,6 +6,12 @@ public class WhistleControl : MonoBehaviour
 {
     [SerializeField] private AudioClip sound;
     [SerializeField] private AudioSource source;
+    [SerializeField] private float soundRadius;
+
+    public float SoundRadius {
+        get { return soundRadius; }
+        set { soundRadius = value; }
+    }
 
     void Start()
     {
@@ -17,7 +23,7 @@ public class WhistleControl : MonoBehaviour
     {
         bool whistle = Input.GetButtonDown("Whistle");
 
-        if (whistle && source.isPlaying)
+        if (whistle && !source.isPlaying)
         {
             Debug.Log("Should be whistling.");
             Whistle();
@@ -27,5 +33,6 @@ public class WhistleControl : MonoBehaviour
     public void Whistle()
     {
         source.Play();
+        EnemyController.instance.ReactToSound(soundRadius, transform.position);
     }
 }

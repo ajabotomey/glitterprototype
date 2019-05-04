@@ -8,7 +8,12 @@ public class EnemyController : MonoBehaviour
 {
     public static EnemyController instance;
 
+    [SerializeField] private LayerMask enemyMask;
     public Transform[] deathPoints;
+
+    public Vector2 SoundPosition {
+        get; set;
+    }
 
     void Start() {
         instance = this;
@@ -22,5 +27,35 @@ public class EnemyController : MonoBehaviour
         int index = Random.Range(0, deathPoints.Length);
 
         return deathPoints[index].position;
+    }
+
+    public void ReactToSound(float soundRadius, Vector2 soundPosition)
+    {
+        SoundPosition = soundPosition;
+        Collider2D[] guardsInRange = Physics2D.OverlapCircleAll(transform.position, soundRadius, enemyMask);
+        // Select one or two guards depending on the amount of guards
+        // Stick with one guard for the moment
+        // Select the closest guard
+
+        if (guardsInRange.Length == 0)
+            return;
+
+        int closestIndex = 0;
+        float closestDistance = 99999;
+        for (int i = 0; i < guardsInRange.Length; i++) {
+            Vector2 position = guardsInRange[i].transform.position;
+            float distance = Vector2.Distance(position, soundPosition);
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestIndex = i;
+            }
+        }
+
+        guardsInRange[closestIndex].gameObject.GetComponent<EnemyGuardNav>().InvestigateSound(soundPosition);
+    }
+
+    public bool CheckEnemyPositionToSound(Vector2 position)
+    {
+        return position == SoundPosition;
     }
 }

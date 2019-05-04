@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyGuardNav : MonoBehaviour
 {
-    enum FSMState { Patrol, Looking, Chase, RunAway }
+    enum FSMState { Patrol, Searching, Chase, RunAway, Investigate }
 
     [Header("Enemy Components")]
     [SerializeField] private FieldOfView fov;
@@ -18,8 +18,11 @@ public class EnemyGuardNav : MonoBehaviour
     [SerializeField] private Transform[] patrolPoints;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float chaseRange;
+    [SerializeField] private float investigateChaseRange;
     [SerializeField] private float stopRange;
     [SerializeField] private float rotateSpeed;
+    [Tooltip("When investigating, increase FOV range to this value")][SerializeField] private float fovRangeInvestigate;
+    [Tooltip("How long does the FOV increase last for?")] [SerializeField] private float investigateTimer;
 
     private FSMState currentState;
     private int patrolIndex = 0;
@@ -27,6 +30,8 @@ public class EnemyGuardNav : MonoBehaviour
     private bool trackingPlayer;
     private float stopPointDistance = 1.0f;
     private Vector2 chosenDeathPoint;
+    private float initialFOVRange;
+    private float elapsedTime;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +41,8 @@ public class EnemyGuardNav : MonoBehaviour
         trackingPlayer = false;
         currentState = FSMState.Patrol;
         chosenDeathPoint = Vector2.zero;
+        initialFOVRange = fov.ViewRadius;
+        elapsedTime = 0;
     }
 
     // Update is called once per frame
@@ -61,7 +68,7 @@ public class EnemyGuardNav : MonoBehaviour
 
                 if (!fov.FOVDetect()) {
                     if (trackingPlayer) {
-                        currentState = FSMState.Looking;
+                        currentState = FSMState.Searching;
                         Debug.Log("Looking for player");
                         break;
                     }
@@ -71,45 +78,16 @@ public class EnemyGuardNav : MonoBehaviour
                 }
                 UpdateChase();
                 break;
-            case FSMState.Looking:
-                LostPlayer();
+            case FSMState.Searching:
+                UpdateSearch();
+                break;
+            case FSMState.Investigate:
+                UpdateInvestigation();
                 break;
             case FSMState.RunAway:
                 UpdateDeath();
                 break;
         }
-    }
-
-    void UpdatePatrol() {
-        if (Vector2.Distance(transform.position, patrolPoints[patrolIndex].position) < stopPointDistance) {
-            if (patrolIndex + 1 < patrolPoints.Length) {
-                patrolIndex++;
-            } else {
-                patrolIndex = 0;
-            }
-        }
-
-        var pos = patrolPoints[patrolIndex].position;
-        RotateAgent(pos);
-
-        agent.destination = pos;
-    }
-
-    void UpdateChase() {
-        // Move towards player
-        RotateAgent(player.transform.position);
-
-        if (Vector2.Distance(transform.position, player.transform.position) < stopRange) {
-            agent.isStopped = true;
-        }
-
-        trackingPlayer = true;
-        lastKnownPosition = player.transform.position;
-
-        agent.destination = lastKnownPosition;
-
-        // Fire at player
-        gunControl.Fire();
     }
 
     void RotateAgent(Vector3 position) {
@@ -129,7 +107,57 @@ public class EnemyGuardNav : MonoBehaviour
         }
     }
 
-    void UpdateDeath() {
+    public void InvestigateSound(Vector2 position)
+    {
+        // Increase FOV range
+        fov.ViewRadius = fovRangeInvestigate;
+        currentState = FSMState.Investigate;
+        RotateAgent(position);
+        agent.destination = position;
+    }
+
+    #region Update State Methods
+    void UpdatePatrol()
+    {
+        if (fov.ViewRadius == fovRangeInvestigate) {
+            fov.ViewRadius = initialFOVRange;
+        }
+
+        if (Vector2.Distance(transform.position, patrolPoints[patrolIndex].position) < stopPointDistance) {
+            if (patrolIndex + 1 < patrolPoints.Length) {
+                patrolIndex++;
+            }
+            else {
+                patrolIndex = 0;
+            }
+        }
+
+        var pos = patrolPoints[patrolIndex].position;
+        RotateAgent(pos);
+
+        agent.destination = pos;
+    }
+
+    void UpdateChase()
+    {
+        // Move towards player
+        RotateAgent(player.transform.position);
+
+        if (Vector2.Distance(transform.position, player.transform.position) < stopRange) {
+            agent.isStopped = true;
+        }
+
+        trackingPlayer = true;
+        lastKnownPosition = player.transform.position;
+
+        agent.destination = lastKnownPosition;
+
+        // Fire at player
+        gunControl.Fire();
+    }
+
+    void UpdateDeath()
+    {
         //Destroy(this.gameObject);
         if (chosenDeathPoint == Vector2.zero) {
             chosenDeathPoint = EnemyController.instance.chooseRandomDeathPoint();
@@ -145,7 +173,8 @@ public class EnemyGuardNav : MonoBehaviour
         agent.destination = chosenDeathPoint;
     }
 
-    void LostPlayer() {
+    void UpdateSearch()
+    {
         if (Vector2.Distance(transform.position, lastKnownPosition) < stopPointDistance) {
             trackingPlayer = false;
             currentState = FSMState.Patrol;
@@ -163,4 +192,33 @@ public class EnemyGuardNav : MonoBehaviour
 
         agent.destination = lastKnownPosition;
     }
+
+    public void UpdateInvestigation()
+    {
+        if (elapsedTime > investigateTimer) {
+            fov.ViewRadius = initialFOVRange;
+            currentState = FSMState.Patrol;
+            elapsedTime = 0;
+            return;
+        }
+
+        // If we spot the player at all, go into chase state
+        if (fov.FOVDetect())
+        {
+            currentState = FSMState.Chase;
+            elapsedTime = 0;
+            return;
+        }
+
+        // TODO: Need to figure out how to actually do this properly
+        if (EnemyController.instance.CheckEnemyPositionToSound(transform.position)) {
+            // Rotate 360 degrees
+            transform.Rotate(0, 0, 6.0f * 10.0f * Time.deltaTime);
+        } else {
+            RotateAgent(EnemyController.instance.SoundPosition);
+        }
+
+        elapsedTime += Time.deltaTime;
+    }
+    #endregion
 }
