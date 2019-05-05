@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 1926470149}
   - component: {fileID: 4996982893191411367}
   - component: {fileID: 5850407884583296440}
+  - component: {fileID: 2435798212392538100}
   - component: {fileID: 1926470148}
   - component: {fileID: 1926470150}
   m_Layer: 8
@@ -127,7 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sound: {fileID: 8300000, guid: 4f2b73507f4c65c44abe1c198addf0ec, type: 3}
   source: {fileID: 45356021353034350}
-  soundRadius: 0
+  soundRadius: 10
 --- !u!114 &5850407884583296440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +144,23 @@ MonoBehaviour:
   smokeBomb: {fileID: 8292951966656795074, guid: 166b2360fc5ca404c8a6b23793b29a28,
     type: 3}
   fireRate: 1
+--- !u!114 &2435798212392538100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5174892480942734517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8e86ac6b697ee443950bd51cfedcd85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpawnPoint: {fileID: 7795234027115376823}
+  fireRate: 10
+  noisemaker: {fileID: 2803545708694882946, guid: 3fbfc7d584500244f98475d16453f203,
+    type: 3}
+  force: 200
 --- !u!50 &1926470148
 Rigidbody2D:
   serializedVersion: 4
@@ -248,7 +266,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 90
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -328,7 +346,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 90
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -408,7 +426,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
