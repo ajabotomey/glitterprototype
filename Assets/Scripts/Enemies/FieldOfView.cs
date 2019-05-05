@@ -9,6 +9,7 @@ public class FieldOfView : MonoBehaviour
 
     public LayerMask targetMask;
     public LayerMask obstacleMask;
+    public LayerMask smokeBombMask;
 
     [HideInInspector]public List<Transform> visibleTargets = new List<Transform>();
 
@@ -73,7 +74,7 @@ public class FieldOfView : MonoBehaviour
             if (angle < viewAngle / 2) {
                 float dstToTarget = Vector2.Distance(transform.position, target.position);
 
-                if (!Physics2D.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask)) {
+                if (!Physics2D.Raycast(transform.position, dirToTarget, dstToTarget, (obstacleMask | smokeBombMask))) {
                     visibleTargets.Add(target);
                 }
             }
@@ -91,6 +92,8 @@ public class FieldOfView : MonoBehaviour
     public bool FOVDetect() {
         Collider2D[] targetsInViewRadius = Physics2D.OverlapCircleAll(transform.position, viewRadius, targetMask);
 
+        int layerMask = obstacleMask | smokeBombMask;
+
         for (int i = 0; i < targetsInViewRadius.Length; i++) {
             Transform target = targetsInViewRadius[i].transform;
             Vector2 dirToTarget = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y);
@@ -98,7 +101,7 @@ public class FieldOfView : MonoBehaviour
             if (angle < viewAngle / 2) {
                 float dstToTarget = Vector2.Distance(transform.position, target.position);
 
-                if (!Physics2D.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask)) {
+                if (!Physics2D.Raycast(transform.position, dirToTarget, dstToTarget, layerMask)) {
                     return true;
                 }
             }
@@ -187,7 +190,7 @@ public class FieldOfView : MonoBehaviour
     ViewCastInfo ViewCast(float globalAngle)
     {
         Vector3 dir = DirFromAngle(globalAngle, true);
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(dir.x, dir.y), viewRadius, obstacleMask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(dir.x, dir.y), viewRadius, obstacleMask | smokeBombMask);
 
         if (hit) {
             return new ViewCastInfo(true, hit.point, hit.distance, globalAngle);

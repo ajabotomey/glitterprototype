@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 218607c814380a4479a888e00330f8e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewRadius: 5
+  viewRadius: 7
   viewAngle: 90
   targetMask:
     serializedVersion: 2
@@ -392,6 +392,9 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 512
+  smokeBombMask:
+    serializedVersion: 2
+    m_Bits: 4096
   visibleTargets: []
   meshResolution: 1
   edgeResolveIterations: 4
