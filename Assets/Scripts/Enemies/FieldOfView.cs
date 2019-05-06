@@ -117,7 +117,7 @@ public class FieldOfView : MonoBehaviour
         List<Vector2> viewPoints = new List<Vector2>();
         ViewCastInfo oldViewCast = new ViewCastInfo();
         for (int i = 0; i <= stepCount; i++) {
-            float angle = -(transform.eulerAngles.z - (viewAngle / 2) + 90) + stepAngleSize * i;
+            float angle = -(transform.eulerAngles.z - (viewAngle / 2) + viewAngle) + stepAngleSize * i;
             ViewCastInfo newViewCast = ViewCast(angle);
 
             if (i > 0) {

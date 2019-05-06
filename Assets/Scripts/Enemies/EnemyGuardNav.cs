@@ -109,12 +109,18 @@ public class EnemyGuardNav : MonoBehaviour
 
     public void InvestigateSound(Vector2 position)
     {
-        // Increase FOV range
+        // Stop
+        agent.isStopped = true;
+        // Wait for a few seconds
+
+
         fov.ViewRadius = fovRangeInvestigate;
         currentState = FSMState.Investigate;
         RotateAgent(position);
+        agent.isStopped = false; // Restart the nav mesh agent
         agent.destination = position;
     }
+
 
     #region Update State Methods
     void UpdatePatrol()
