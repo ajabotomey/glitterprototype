@@ -8,6 +8,7 @@ public class UIController : MonoBehaviour
 {
     [SerializeField] private GameObject warningFrame;
     [SerializeField] private GameObject diedFrame;
+    [SerializeField] private GameObject controlFrame;
 
     public static UIController instance = null;
 
@@ -18,16 +19,19 @@ public class UIController : MonoBehaviour
         Time.timeScale = 0f;
         warningFrame.SetActive(true);
         diedFrame.SetActive(false);
+        controlFrame.SetActive(false);
     }
 
     public void StartGame() {
         warningFrame.SetActive(false);
         EnemyController.instance.TurnOnFovVisualisation();
         Time.timeScale = 1f;
+        controlFrame.SetActive(true);
     }
 
     public void Died() {
         diedFrame.SetActive(true);
+        controlFrame.SetActive(false);
         EnemyController.instance.TurnOffFovVisualisation();
         Time.timeScale = 0f;
     }
