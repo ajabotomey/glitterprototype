@@ -8,6 +8,7 @@ public class MaskControl : MonoBehaviour
     [SerializeField] private LayerMask target;
 
     private bool maskOn = false;
+    public bool BeingChased { get; set; }
 
     // Start is called before the first frame update
     void Start()
@@ -23,21 +24,22 @@ public class MaskControl : MonoBehaviour
             if (Input.GetButtonDown("Fire1")) {
 
                 // Check if I'm being chased
+                if (!BeingChased) {
+                    if (maskOn) {
+                        // Change the sprite
 
-                if (maskOn) {
-                    // Change the sprite
+                        // Change the layermask
+                        this.gameObject.layer = (int)Mathf.Log(player.value, 2);
 
-                    // Change the layermask
-                    this.gameObject.layer = (int)Mathf.Log(player.value, 2);
+                        maskOn = false;
+                    } else {
+                        // Change the sprite
 
-                    maskOn = false;
-                } else {
-                    // Change the sprite
+                        // Change the layermask
+                        this.gameObject.layer = (int)Mathf.Log(target.value, 2);
 
-                    // Change the layermask
-                    this.gameObject.layer = (int)Mathf.Log(target.value, 2);
-
-                    maskOn = true;
+                        maskOn = true;
+                    }
                 }
             }
         }

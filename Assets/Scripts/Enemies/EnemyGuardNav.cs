@@ -125,6 +125,8 @@ public class EnemyGuardNav : MonoBehaviour
     #region Update State Methods
     void UpdatePatrol()
     {
+        player.GetComponent<MaskControl>().BeingChased = false;
+
         if (fov.ViewRadius == fovRangeInvestigate) {
             fov.ViewRadius = initialFOVRange;
         }
@@ -146,6 +148,8 @@ public class EnemyGuardNav : MonoBehaviour
 
     void UpdateChase()
     {
+        player.GetComponent<MaskControl>().BeingChased = true;
+
         // Move towards player
         RotateAgent(player.transform.position);
 
