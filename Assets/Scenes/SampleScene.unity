@@ -1304,7 +1304,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.02, y: 0.92, z: -11}
+  m_LocalPosition: {x: -0.22, y: -1.85, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4166,7 +4166,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1187887799}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.02, y: 0.92, z: -11}
+  m_LocalPosition: {x: -0.22, y: -1.85, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2057639949}
@@ -5171,7 +5171,7 @@ GameObject:
   - component: {fileID: 1704116766}
   - component: {fileID: 1704116768}
   - component: {fileID: 1704116767}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Road
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13356,6 +13356,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard
       objectReference: {fileID: 0}
+    - target: {fileID: 8393856167443883883, guid: f0c3e90ced1fce942925392268baa648,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8393856167443883884, guid: f0c3e90ced1fce942925392268baa648,
         type: 3}
       propertyPath: viewAngle
@@ -13477,12 +13482,12 @@ PrefabInstance:
     - target: {fileID: 5174892480942734519, guid: 9cfb23204bf42b242901d8d9a73d8eec,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.02
+      value: -0.22
       objectReference: {fileID: 0}
     - target: {fileID: 5174892480942734519, guid: 9cfb23204bf42b242901d8d9a73d8eec,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.92
+      value: -1.85
       objectReference: {fileID: 0}
     - target: {fileID: 5174892480942734519, guid: 9cfb23204bf42b242901d8d9a73d8eec,
         type: 3}
@@ -13531,9 +13536,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2435798212392538100, guid: 9cfb23204bf42b242901d8d9a73d8eec,
         type: 3}
-      propertyPath: force
-      value: 100
+      propertyPath: obstacleMask.m_Bits
+      value: 512
       objectReference: {fileID: 0}
+    - target: {fileID: 6228227288594606825, guid: 9cfb23204bf42b242901d8d9a73d8eec,
+        type: 3}
+      propertyPath: noisemaker
+      value: 
+      objectReference: {fileID: 2800000, guid: 44beec7717558564985a805db38ebe24, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9cfb23204bf42b242901d8d9a73d8eec, type: 3}
 --- !u!1001 &6333988124507576216

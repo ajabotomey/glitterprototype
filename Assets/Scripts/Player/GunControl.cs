@@ -22,14 +22,15 @@ public class GunControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //bool fireBullet = Input.GetButtonDown("Fire1");
-        bool fireBullet = Input.GetButton("Fire1");
+        if (WeaponControl.instance.CurrentWeapon == WeaponControl.WeaponState.GUN) {
+            bool fireBullet = Input.GetButtonDown("Fire1");
 
-        if (fireBullet && elapsedTime >= fireRate) {
-            GameObject firedBullet = Instantiate(bullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-            firedBullet.GetComponent<Rigidbody2D>().AddForce(transform.up * 500.0f);
+            if (fireBullet && elapsedTime >= fireRate) {
+                GameObject firedBullet = Instantiate(bullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+                firedBullet.GetComponent<Rigidbody2D>().AddForce(transform.up * 500.0f);
 
-            elapsedTime = 0.0f;
+                elapsedTime = 0.0f;
+            }
         }
 
         elapsedTime += Time.deltaTime;

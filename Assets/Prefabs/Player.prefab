@@ -80,7 +80,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.14189148
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -116,7 +116,7 @@ LineRenderer:
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 0
+      m_Mode: 1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
@@ -146,6 +146,7 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 512
+  laserHit: {fileID: 2728471444907226066}
 --- !u!1 &3217066900727416026
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,6 +192,7 @@ GameObject:
   - component: {fileID: 4996982893191411367}
   - component: {fileID: 5850407884583296440}
   - component: {fileID: 2435798212392538100}
+  - component: {fileID: 6228227288594606825}
   - component: {fileID: 1926470148}
   - component: {fileID: 1926470150}
   m_Layer: 8
@@ -306,7 +308,21 @@ MonoBehaviour:
   fireRate: 10
   noisemaker: {fileID: 2803545708694882946, guid: 3fbfc7d584500244f98475d16453f203,
     type: 3}
-  force: 200
+  force: 100
+--- !u!114 &6228227288594606825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5174892480942734517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 055d2dd86f27c6b4eb5456f1ad294750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noisemaker: {fileID: 2800000, guid: 26e10ac9bb770d5489fd3f13873ffdfe, type: 3}
+  smokebomb: {fileID: 0}
 --- !u!50 &1926470148
 Rigidbody2D:
   serializedVersion: 4

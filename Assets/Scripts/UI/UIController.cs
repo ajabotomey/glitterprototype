@@ -27,6 +27,7 @@ public class UIController : MonoBehaviour
         EnemyController.instance.TurnOnFovVisualisation();
         Time.timeScale = 1f;
         controlFrame.SetActive(true);
+        Cursor.visible = false;
     }
 
     public void Died() {
@@ -34,6 +35,7 @@ public class UIController : MonoBehaviour
         controlFrame.SetActive(false);
         EnemyController.instance.TurnOffFovVisualisation();
         Time.timeScale = 0f;
+        Cursor.visible = true;
     }
 
     public void RestartGame() {
