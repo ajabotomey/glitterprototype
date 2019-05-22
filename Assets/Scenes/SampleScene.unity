@@ -4084,7 +4084,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 337.2, y: 182.8}
+  m_AnchoredPosition: {x: 337.2, y: 182.79999}
   m_SizeDelta: {x: 674.4, y: 365.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1187887799
@@ -13361,7 +13361,7 @@ PrefabInstance:
     - target: {fileID: 8393856167443883883, guid: f0c3e90ced1fce942925392268baa648,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8393856167443883884, guid: f0c3e90ced1fce942925392268baa648,
         type: 3}
@@ -13536,21 +13536,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2435798212392538100, guid: 9cfb23204bf42b242901d8d9a73d8eec,
-        type: 3}
-      propertyPath: obstacleMask.m_Bits
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 6228227288594606825, guid: 9cfb23204bf42b242901d8d9a73d8eec,
-        type: 3}
-      propertyPath: noisemaker
-      value: 
-      objectReference: {fileID: 2800000, guid: 44beec7717558564985a805db38ebe24, type: 3}
-    - target: {fileID: 6228227288594606825, guid: 9cfb23204bf42b242901d8d9a73d8eec,
-        type: 3}
-      propertyPath: smokebomb
-      value: 
-      objectReference: {fileID: 2800000, guid: e0d0a98fc58066e47b065a5a6c2f4b61, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9cfb23204bf42b242901d8d9a73d8eec, type: 3}
 --- !u!1001 &6333988124507576216

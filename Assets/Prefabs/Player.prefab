@@ -193,6 +193,7 @@ GameObject:
   - component: {fileID: 5850407884583296440}
   - component: {fileID: 2435798212392538100}
   - component: {fileID: 6228227288594606825}
+  - component: {fileID: 1926470155}
   - component: {fileID: 1926470148}
   - component: {fileID: 1926470150}
   m_Layer: 8
@@ -308,7 +309,10 @@ MonoBehaviour:
   fireRate: 10
   noisemaker: {fileID: 2803545708694882946, guid: 3fbfc7d584500244f98475d16453f203,
     type: 3}
-  force: 100
+  zSpeed: 0
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &6228227288594606825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,8 +325,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 055d2dd86f27c6b4eb5456f1ad294750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noisemaker: {fileID: 2800000, guid: 26e10ac9bb770d5489fd3f13873ffdfe, type: 3}
-  smokebomb: {fileID: 0}
+  noisemaker: {fileID: 2800000, guid: 44beec7717558564985a805db38ebe24, type: 3}
+  smokebomb: {fileID: 2800000, guid: e0d0a98fc58066e47b065a5a6c2f4b61, type: 3}
+--- !u!114 &1926470155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5174892480942734517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eee2c66ca83cc2e4aa3d53f4636bcfe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player:
+    serializedVersion: 2
+    m_Bits: 256
+  target:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!50 &1926470148
 Rigidbody2D:
   serializedVersion: 4

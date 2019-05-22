@@ -89,7 +89,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2702801629833610499}
   - component: {fileID: 4833681744318754133}
-  - component: {fileID: 4271051103652873920}
   - component: {fileID: 6904547086604971067}
   - component: {fileID: 641117614751245766}
   m_Layer: 13
@@ -126,30 +125,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1655141d1c9a9c8459cafb5a7a8c4293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 4271051103652873920}
+  sprite: {fileID: 0}
   source: {fileID: 641117614751245766}
   soundRadius: 10
---- !u!50 &4271051103652873920
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2803545708694882946}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 2
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!61 &6904547086604971067
 BoxCollider2D:
   m_ObjectHideFlags: 0
