@@ -7,7 +7,6 @@ public class NoisemakerControl : MonoBehaviour
     [SerializeField] private Transform bulletSpawnPoint;
     [SerializeField] private float fireRate = 10.0f;
     [SerializeField] private GameObject noisemaker;
-    [SerializeField] private float force = 200f;
     [SerializeField] private float zSpeed = 0;
     [SerializeField] private LayerMask obstacleMask;
 
@@ -32,12 +31,19 @@ public class NoisemakerControl : MonoBehaviour
             RaycastHit2D initialHit = Physics2D.Raycast(mousePos, Vector2.zero, maxDistance, obstacleMask);
             RaycastHit2D obstructionHit = Physics2D.Raycast(transform.position, transform.up, distance, obstacleMask);
 
-            Debug.Log(mousePos);
+            Debug.Log(distance);
 
             if (!initialHit && !obstructionHit) {
                 if (launchNoise) {
-                    Noisemaker noise = Instantiate(noisemaker, bulletSpawnPoint.position, Quaternion.identity).GetComponent<Noisemaker>();
-                    noise.Init(distance, mousePos);
+
+                    // If it is a small distance, we might as well drop it at the position as opposed to throwing it
+                    //if (distance <= 3.0f) {
+                    //    Noisemaker noise = Instantiate(noisemaker, mousePos, Quaternion.identity).GetComponent<Noisemaker>();
+                    //    noise.Landed();
+                    //} else {
+                        Noisemaker noise = Instantiate(noisemaker, bulletSpawnPoint.position, Quaternion.identity).GetComponent<Noisemaker>();
+                        noise.Init(distance, mousePos);
+                    //}
                 }
             } else {
                 // Change the cursor

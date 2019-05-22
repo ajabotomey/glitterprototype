@@ -27,15 +27,16 @@ public class Noisemaker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float step = zSpeed * Time.deltaTime;
+        if (inFlight) {
+            float step = zSpeed * Time.deltaTime;
 
-        if (Vector2.Distance(transform.position, landPosition) > 0.2) {
-            transform.position = Vector2.MoveTowards(transform.position, landPosition, step);
-            UpdateSprite();
-        } else {
-            if (inFlight) {
-                Landed();
-                inFlight = false;
+            if (Vector2.Distance(transform.position, landPosition) > 0.2) {
+                transform.position = Vector2.MoveTowards(transform.position, landPosition, step);
+                UpdateSprite();
+            } else {
+                if (inFlight) {
+                    Landed();
+                }
             }
         }
     }
@@ -47,8 +48,9 @@ public class Noisemaker : MonoBehaviour
         }
     }
 
-    private void Landed()
+    public void Landed()
     {
+        inFlight = false;
         if (source.isPlaying) {
             source.Stop();
         }

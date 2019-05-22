@@ -9,7 +9,7 @@ public class WeaponControl : MonoBehaviour
     [SerializeField] private Texture2D noisemaker;
     [SerializeField] private Texture2D smokebomb;
 
-    public enum WeaponState { GUN, NOISE, SMOKE }
+    public enum WeaponState { GUN, NOISE }
     public WeaponState CurrentWeapon { get; set; }
 
     // Start is called before the first frame update
@@ -30,9 +30,6 @@ public class WeaponControl : MonoBehaviour
             Debug.Log("Swap to Noisemaker");
             Cursor.SetCursor(noisemaker, new Vector3(0, 0, -1), CursorMode.Auto);
             CurrentWeapon = WeaponState.NOISE;
-        } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
-            Debug.Log("Swap to Smokebomb");
-            CurrentWeapon = WeaponState.SMOKE;
         }
     }
 }
