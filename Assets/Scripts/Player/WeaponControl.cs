@@ -9,7 +9,7 @@ public class WeaponControl : MonoBehaviour
     [SerializeField] private Texture2D noisemaker;
     [SerializeField] private Texture2D smokebomb;
 
-    public enum WeaponState { GUN, NOISE, MASK }
+    public enum WeaponState { GUN, GRENADE, NOISE, MASK }
     public WeaponState CurrentWeapon { get; set; }
 
     // Start is called before the first frame update
@@ -26,11 +26,13 @@ public class WeaponControl : MonoBehaviour
             Cursor.visible = false;
             CurrentWeapon = WeaponState.GUN;
         } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+            CurrentWeapon = WeaponState.GRENADE;
+        } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
             Cursor.visible = true;
             Debug.Log("Swap to Noisemaker");
             Cursor.SetCursor(noisemaker, new Vector3(0, 0, -1), CursorMode.Auto);
             CurrentWeapon = WeaponState.NOISE;
-        } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
+        } else if (Input.GetKeyDown(KeyCode.Alpha4)) {
             Debug.Log("Put on / take off SmartMask");
             Cursor.visible = false;
             CurrentWeapon = WeaponState.MASK;
