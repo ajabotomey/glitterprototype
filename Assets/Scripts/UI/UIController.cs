@@ -9,6 +9,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject warningFrame;
     [SerializeField] private GameObject diedFrame;
     [SerializeField] private GameObject controlFrame;
+    [SerializeField] private GameObject weaponWheel;
 
     public static UIController instance = null;
 
@@ -20,6 +21,8 @@ public class UIController : MonoBehaviour
         warningFrame.SetActive(true);
         diedFrame.SetActive(false);
         controlFrame.SetActive(false);
+        weaponWheel.SetActive(false);
+        Cursor.visible = true;
     }
 
     public void StartGame() {
@@ -53,5 +56,37 @@ public class UIController : MonoBehaviour
 #elif (UNITY_WEBGL)
         Application.OpenURL("about:blank");
 #endif
+    }
+
+    public void ShowWeaponWheel()
+    {
+        Cursor.visible = true;
+        weaponWheel.SetActive(true);
+    }
+
+    public void HideWeaponWheel()
+    {
+        if (WeaponControl.instance.CurrentWeapon != WeaponControl.WeaponState.NOISE)
+            Cursor.visible = false;
+
+        weaponWheel.SetActive(false);
+    }
+
+    public void SelectGun()
+    {
+        weaponWheel.SetActive(false);
+        WeaponControl.instance.SelectGun();
+    }
+
+    public void SelectNoise()
+    {
+        weaponWheel.SetActive(false);
+        WeaponControl.instance.SelectNoise();
+    }
+
+    public void SelectMask()
+    {
+        weaponWheel.SetActive(false);
+        WeaponControl.instance.SelectMask();
     }
 }

@@ -22,8 +22,12 @@ public class NoisemakerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // No accidentally firing the weapon while selecting a weapon
+        if (InputController.instance.SelectWeapon())
+            return;
+
         if (WeaponControl.instance.CurrentWeapon == WeaponControl.WeaponState.NOISE) {
-            bool launchNoise = Input.GetButtonDown("Fire1");
+            bool launchNoise = InputController.instance.FireWeapon();
 
             // Check that we aren't throwing it onto an object. Also make sure we aren't throwing over obstacles as well
             var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

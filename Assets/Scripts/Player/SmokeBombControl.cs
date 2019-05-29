@@ -18,7 +18,7 @@ public class SmokeBombControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool smokebomb = Input.GetButtonDown("Smokebomb");
+        bool smokebomb = InputController.instance.SmokeBomb();
 
         if (smokebomb && elapsedTime >= fireRate) {
             Instantiate(smokeBomb, transform.position, Quaternion.identity);

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,31 +12,86 @@ public class WeaponControl : MonoBehaviour
 
     public enum WeaponState { GUN, GRENADE, NOISE, MASK }
     public WeaponState CurrentWeapon { get; set; }
+    private int weaponCount = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
+        weaponCount = Enum.GetValues(typeof(WeaponState)).Length;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Keyboard input
         if (Input.GetKeyDown(KeyCode.Alpha1)) {
-            Debug.Log("Return to Gun");
-            Cursor.visible = false;
-            CurrentWeapon = WeaponState.GUN;
+            SelectGun();
         } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
             CurrentWeapon = WeaponState.GRENADE;
         } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
-            Cursor.visible = true;
-            Debug.Log("Swap to Noisemaker");
-            Cursor.SetCursor(noisemaker, new Vector3(0, 0, -1), CursorMode.Auto);
-            CurrentWeapon = WeaponState.NOISE;
+            SelectNoise();
         } else if (Input.GetKeyDown(KeyCode.Alpha4)) {
-            Debug.Log("Put on / take off SmartMask");
-            Cursor.visible = false;
-            CurrentWeapon = WeaponState.MASK;
+            SelectMask();
         }
+
+        // Mouse scrollwheel input
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f) {
+            if (CurrentWeapon == WeaponState.GUN)
+                CurrentWeapon = (WeaponState)(weaponCount - 1);
+            else
+                CurrentWeapon--;
+
+            SelectWeapon((int)CurrentWeapon);
+        } else if (Input.GetAxis("Mouse ScrollWheel") < 0f) {
+            int value = (int)CurrentWeapon;
+            if (value == weaponCount - 1)
+                CurrentWeapon = WeaponState.GUN;
+            else
+                CurrentWeapon++;
+
+            SelectWeapon((int)CurrentWeapon);
+        }
+
+        if (InputController.instance.SelectWeapon()) {
+            UIController.instance.ShowWeaponWheel();
+        } else {
+            UIController.instance.HideWeaponWheel();
+        }
+    }
+
+    public void SelectWeapon(int index)
+    {
+        if (index == 0) {
+            SelectGun();
+        } else if (index == 1) {
+            Debug.Log("Selected Grenade");
+        } else if (index == 2) {
+            SelectNoise();
+        } else if (index == 3) {
+            SelectMask();
+        }
+    }
+
+    public void SelectGun()
+    {
+        Debug.Log("Return to Gun");
+        Cursor.visible = false;
+        CurrentWeapon = WeaponState.GUN;
+    }
+
+    public void SelectNoise()
+    {
+        Cursor.visible = true;
+        Debug.Log("Swap to Noisemaker");
+        Cursor.SetCursor(noisemaker, new Vector3(0, 0, -1), CursorMode.Auto);
+        CurrentWeapon = WeaponState.NOISE;
+    }
+
+    public void SelectMask()
+    {
+        Debug.Log("Put on / take off SmartMask");
+        Cursor.visible = false;
+        CurrentWeapon = WeaponState.MASK;
     }
 }

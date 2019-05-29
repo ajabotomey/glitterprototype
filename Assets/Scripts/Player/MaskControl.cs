@@ -19,9 +19,13 @@ public class MaskControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // No accidentally firing the weapon while selecting a weapon
+        if (InputController.instance.SelectWeapon())
+            return;
+
         if (WeaponControl.instance.CurrentWeapon == WeaponControl.WeaponState.MASK) {
 
-            if (Input.GetButtonDown("Fire1")) {
+            if (InputController.instance.FireWeapon()) {
 
                 // Check if I'm being chased
                 if (!BeingChased) {
