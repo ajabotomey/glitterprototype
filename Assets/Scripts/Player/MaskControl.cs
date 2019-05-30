@@ -10,12 +10,6 @@ public class MaskControl : MonoBehaviour
     private bool maskOn = false;
     public bool BeingChased { get; set; }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {

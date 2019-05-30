@@ -30,20 +30,30 @@ public class PlayerControl : MonoBehaviour
     }
 
     void RotateCharacter() {
-        Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        difference.Normalize();
-        float rotation_z = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+        if (InputController.instance.isControllerActive()) {
+            var angle = InputController.instance.Rotation();
 
-        float rotationWithOffset = rotation_z + offset;
+            if (angle == 0) {
+                rb.MoveRotation(0);
+            } else {
+                var angleWithOffset = angle - offset;
+                rb.MoveRotation(angleWithOffset);
+            }
+        } else {
+            Vector3 difference = Camera.main.ScreenToWorldPoint(InputController.instance.MousePosition()) - transform.position;
+            difference.Normalize();
+            float rotation_z = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
 
-        rb.MoveRotation(rotationWithOffset);
+            float rotationWithOffset = rotation_z + offset;
+
+            rb.MoveRotation(rotationWithOffset);
+        }
     }
 
     void HandleMovement() {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        float moveHorizontal = InputController.instance.Horizontal();
+        float moveVertical = InputController.instance.Vertical();
 
-        //gameObject.transform.position = new Vector2(transform.position.x + (moveHorizontal * speed), transform.position.y + (moveVertical * speed));
         float posX = transform.position.x + moveHorizontal * speed * Time.fixedDeltaTime;
         float posY = transform.position.y + moveVertical * speed * Time.fixedDeltaTime;
 
