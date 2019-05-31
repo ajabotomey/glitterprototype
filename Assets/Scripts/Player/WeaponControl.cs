@@ -53,10 +53,12 @@ public class WeaponControl : MonoBehaviour
             SelectWeapon((int)CurrentWeapon);
         }
 
-        if (InputController.instance.SelectWeapon()) {
-            UIController.instance.ShowWeaponWheel();
-        } else {
-            UIController.instance.HideWeaponWheel();
+        if (!UIController.instance.isInMenu) {
+            if (InputController.instance.SelectWeapon()) {
+                UIController.instance.ShowWeaponWheel();
+            } else {
+                UIController.instance.HideWeaponWheel();
+            }
         }
     }
 

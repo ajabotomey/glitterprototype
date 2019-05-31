@@ -14433,12 +14433,17 @@ PrefabInstance:
     - target: {fileID: 8393856167443883883, guid: f0c3e90ced1fce942925392268baa648,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8393856167443883884, guid: f0c3e90ced1fce942925392268baa648,
         type: 3}
       propertyPath: viewAngle
       value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393856167443883884, guid: f0c3e90ced1fce942925392268baa648,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5054909757285781348, guid: f0c3e90ced1fce942925392268baa648,
         type: 3}
@@ -14539,6 +14544,15 @@ PrefabInstance:
       propertyPath: patrolPoints.Array.data[4]
       value: 
       objectReference: {fileID: 765075690}
+    - target: {fileID: 478863961, guid: f0c3e90ced1fce942925392268baa648, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8566352186858407898, guid: f0c3e90ced1fce942925392268baa648,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0c3e90ced1fce942925392268baa648, type: 3}
 --- !u!1001 &5174892481786799796

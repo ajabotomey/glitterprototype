@@ -13,6 +13,8 @@ public class UIController : MonoBehaviour
 
     public static UIController instance = null;
 
+    public bool isInMenu = true;
+
     void Awake()
     {
         if (instance == null) {
@@ -33,6 +35,7 @@ public class UIController : MonoBehaviour
         controlFrame.SetActive(false);
         weaponWheel.SetActive(false);
         Cursor.visible = true;
+        isInMenu = true;
     }
 
     void Update()
@@ -46,6 +49,7 @@ public class UIController : MonoBehaviour
         Time.timeScale = 1f;
         controlFrame.SetActive(true);
         Cursor.visible = false;
+        isInMenu = false;
     }
 
     public void Died() {
@@ -54,6 +58,7 @@ public class UIController : MonoBehaviour
         EnemyController.instance.TurnOffFovVisualisation();
         Time.timeScale = 0f;
         Cursor.visible = true;
+        isInMenu = true;
     }
 
     public void RestartGame() {

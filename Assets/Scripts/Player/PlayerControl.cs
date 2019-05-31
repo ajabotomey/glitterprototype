@@ -2,6 +2,8 @@
 
 public class PlayerControl : MonoBehaviour
 {
+    public static PlayerControl instance = null;
+
     [SerializeField]
     private Rigidbody2D rb;
 
@@ -15,7 +17,7 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        instance = this;
     }
 
     // Update is called once per frame
@@ -48,6 +50,14 @@ public class PlayerControl : MonoBehaviour
 
             rb.MoveRotation(rotationWithOffset);
         }
+    }
+
+    public void RotateTowardsTarget(Transform target)
+    {
+        var dir = target.position - transform.position;
+        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        var angleWithOffset = angle - offset;
+        rb.MoveRotation(angleWithOffset);
     }
 
     void HandleMovement() {

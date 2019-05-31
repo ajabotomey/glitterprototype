@@ -248,6 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 50
+  healthBar: {fileID: 0}
 --- !u!114 &1926470149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,6 +264,12 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 7795234027115376823}
   fireRate: 0.1
   bullet: {fileID: 6927769811918053513, guid: c2ea68b876745a14aa1a21e22d467a36, type: 3}
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 512
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &4996982893191411367
 MonoBehaviour:
   m_ObjectHideFlags: 0
