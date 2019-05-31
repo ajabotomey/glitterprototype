@@ -19,6 +19,7 @@ public class MenuController : MonoBehaviour
         }
 
         mainMenu.gameObject.SetActive(true);
+        settingsMenu.gameObject.SetActive(false);
     }
 
     public void SwapToMainMenu()

@@ -11,6 +11,11 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button quitGameButton;
 
+    void OnEnable()
+    {
+        SettingsManager.Instance.UpdateFont();
+    }
+
     public void StartGame()
     {
         SceneManager.LoadScene("SampleScene");

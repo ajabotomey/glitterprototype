@@ -9,16 +9,15 @@ public class UISlider : MonoBehaviour
     [SerializeField] private Text value;
     [SerializeField] private string fieldName;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
         var sliderValue = Mathf.RoundToInt((slider.value / slider.maxValue) * 100);
         value.text = fieldName + ": " + sliderValue;
+    }
+
+    public void SetValue(int value)
+    {
+        slider.value = value;
     }
 }

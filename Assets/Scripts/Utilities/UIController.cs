@@ -35,6 +35,11 @@ public class UIController : MonoBehaviour
         Cursor.visible = true;
     }
 
+    void Update()
+    {
+        SettingsManager.Instance.UpdateFont();
+    }
+
     public void StartGame() {
         warningFrame.SetActive(false);
         EnemyController.instance.TurnOnFovVisualisation();
