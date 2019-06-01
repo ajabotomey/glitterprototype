@@ -8,6 +8,7 @@ public class MenuController : MonoBehaviour
 
     [SerializeField] private MainMenu mainMenu;
     [SerializeField] private SettingsMenu settingsMenu;
+    [SerializeField] private GameObject controlMapperWindow;
 
     void Awake()
     {
@@ -20,6 +21,7 @@ public class MenuController : MonoBehaviour
 
         mainMenu.gameObject.SetActive(true);
         settingsMenu.gameObject.SetActive(false);
+        controlMapperWindow.SetActive(false);
     }
 
     public void SwapToMainMenu()
@@ -32,5 +34,12 @@ public class MenuController : MonoBehaviour
     {
         settingsMenu.gameObject.SetActive(true);
         mainMenu.gameObject.SetActive(false);
+        controlMapperWindow.SetActive(false);
+    }
+
+    public void SwapToControlMapper()
+    {
+        settingsMenu.gameObject.SetActive(false);
+        controlMapperWindow.SetActive(true);
     }
 }
