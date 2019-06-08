@@ -11,4 +11,9 @@ public class UIToggle : MonoBehaviour
     {
         toggle.isOn = value;
     }
+
+    public Toggle GetObject()
+    {
+        return toggle;
+    }
 }

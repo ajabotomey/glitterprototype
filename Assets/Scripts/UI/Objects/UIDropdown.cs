@@ -30,4 +30,9 @@ public class UIDropdown : MonoBehaviour
     {
         return currentValue;
     }
+
+    public Dropdown GetObject()
+    {
+        return dropdown;
+    }
 }

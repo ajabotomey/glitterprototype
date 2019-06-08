@@ -20,4 +20,9 @@ public class UISlider : MonoBehaviour
     {
         slider.value = value;
     }
+
+    public Slider GetObject()
+    {
+        return slider;
+    }
 }

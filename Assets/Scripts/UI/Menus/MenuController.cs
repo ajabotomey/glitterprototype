@@ -42,4 +42,10 @@ public class MenuController : MonoBehaviour
         settingsMenu.gameObject.SetActive(false);
         controlMapperWindow.SetActive(true);
     }
+
+    public void ReturnFromControlMapper()
+    {
+        SwapToSettingsMenu();
+        settingsMenu.GetComponent<SettingsMenu>().ReturnFromControlMapper();
+    }
 }

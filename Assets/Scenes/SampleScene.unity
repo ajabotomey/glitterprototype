@@ -1749,7 +1749,7 @@ MonoBehaviour:
       motionColorIntensity: 4
       motionGridSize: 64
       colorBlindnessType: 0
-      colorBlindnessStrength: 1
+      colorBlindnessStrength: 0.219
   m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
   m_ShowToolkit: 1
   m_ShowCustomSorter: 0
@@ -1767,7 +1767,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -3992,6 +3992,7 @@ MonoBehaviour:
   diedFrame: {fileID: 362737481}
   controlFrame: {fileID: 1087317365}
   weaponWheel: {fileID: 983593021}
+  isInMenu: 1
 --- !u!114 &860649397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14232,7 +14233,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1967653688}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84f47e685cace65468e1afbcf253048a, type: 3}
   m_Name: 

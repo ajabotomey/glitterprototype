@@ -17,9 +17,10 @@ public class InputController : MonoBehaviour
     private ControllerMap keyboardMap;
     private ControllerMap joystickMap;
     private Mouse mouse;
+    private Joystick joystick;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         instance = this;
         player = ReInput.players.GetPlayer(playerID);
@@ -34,13 +35,15 @@ public class InputController : MonoBehaviour
             // By Default, disable the keyboard map if a controller is connected
             keyboardMap.enabled = false;
             mouseMap.enabled = false;
+            joystick = player.controllers.Joysticks[0]; // Only ever be one joystick
         } else {
             // If no controller is connected, then ensure that the keyboard are enabled
             keyboardMap.enabled = true;
             mouseMap.enabled = true;
+            mouse = ReInput.controllers.Mouse;
         }
 
-        mouse = ReInput.controllers.Mouse;
+        
     }
 
     public bool isControllerActive()
@@ -83,5 +86,21 @@ public class InputController : MonoBehaviour
     public bool SelectWeapon()
     {
         return player.GetButton("GadgetWheel");
+    }
+
+    // Set rumble in all motors
+    public void SetRumble(float duration)
+    {
+        var sensitivity = SettingsManager.Instance.GetRumbleSensitivity();
+
+        if (!joystick.supportsVibration) return;
+        for (int i = 0; i < joystick.vibrationMotorCount; i++) {
+            joystick.SetVibration(i, sensitivity, duration);
+        }
+    }
+
+    public void StopRumble()
+    {
+        joystick.StopVibration();
     }
 }
