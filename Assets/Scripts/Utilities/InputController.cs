@@ -41,9 +41,8 @@ public class InputController : MonoBehaviour
             keyboardMap.enabled = true;
             mouseMap.enabled = true;
             mouse = ReInput.controllers.Mouse;
+            joystick = null;
         }
-
-        
     }
 
     public bool isControllerActive()
@@ -91,6 +90,9 @@ public class InputController : MonoBehaviour
     // Set rumble in all motors
     public void SetRumble(float duration)
     {
+        if (joystick == null)
+            return;
+
         var sensitivity = SettingsManager.Instance.GetRumbleSensitivity();
 
         if (!joystick.supportsVibration) return;
@@ -102,5 +104,10 @@ public class InputController : MonoBehaviour
     public void StopRumble()
     {
         joystick.StopVibration();
+    }
+
+    public bool UICancel()
+    {
+        return player.GetButton("UICancel");
     }
 }

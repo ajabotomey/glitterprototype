@@ -27,6 +27,9 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private UIToggle fullscreenToggle;
 
     [Header("Input UI Widgets")]
+    [SerializeField] private UISlider inputSensitivitySlider;
+    [SerializeField] private UIToggle rumbleEnabledToggle;
+    [SerializeField] private UISlider rumbleSensitivitySlider;
     [SerializeField] private Button rebindControlsButton;
 
     [Header("Bottom Buttons")]
@@ -45,13 +48,26 @@ public class SettingsMenu : MonoBehaviour
         var fullscreenEnabled = SettingsManager.Instance.IsFullscreenEnabled();
         var autoAimEnabled = SettingsManager.Instance.IsAutoAimEnabled();
         var autoAimStrength = SettingsManager.Instance.GetAutoAimStrength();
+        var inputSensitivity = SettingsManager.Instance.GetInputSensitivity();
+        var rumbleEnabled = SettingsManager.Instance.IsRumbleEnabled();
+        var rumbleSensitivity = SettingsManager.Instance.GetRumbleSensitivity();
 
+        // General
         gameSpeedSlider.SetValue((int)gameSpeed);
+        autoAimToggle.SetValue(autoAimEnabled);
+        autoAimStrengthSlider.SetValue(autoAimStrength);
+
+        // Video
         dyslexicTextToggle.SetValue(dyslexicText);
         resolutionDropdown.SetOptions(supportedResolutions);
         fullscreenToggle.SetValue(fullscreenEnabled);
-        autoAimToggle.SetValue(autoAimEnabled);
-        autoAimStrengthSlider.SetValue(autoAimStrength);
+
+        // Sound
+
+        // Input
+        inputSensitivitySlider.SetValue(inputSensitivity);
+        rumbleEnabledToggle.SetValue(rumbleEnabled);
+        rumbleSensitivitySlider.SetValue(rumbleSensitivity);
 
         backNav = backToMainMenuButton.navigation;
         applyNav = applyChangesButton.navigation;
@@ -72,10 +88,13 @@ public class SettingsMenu : MonoBehaviour
     {
         SettingsManager.Instance.UpdateFont();
 
-        if (SettingsManager.Instance.IsAutoAimEnabled()) {
-            autoAimStrengthSlider.gameObject.SetActive(true);
-        } else {
-            autoAimStrengthSlider.gameObject.SetActive(false);
+        if (InputController.instance.UICancel()) {
+            // If settings have changed
+                // Show dialog box asking to save changes
+            // else 
+                // Go back to main menu
+
+            MenuController.instance.SwapToMainMenu();
         }
     }
 
@@ -94,14 +113,36 @@ public class SettingsMenu : MonoBehaviour
 
         // Rewire the navigation first
         if (value) {
+            autoAimStrengthSlider.gameObject.SetActive(true);
             nav.selectOnDown = slider;
             toggle.navigation = nav;
         } else {
+            autoAimStrengthSlider.gameObject.SetActive(false);
             nav.selectOnDown = applyChangesButton;
             toggle.navigation = nav;
         }
 
         SettingsManager.Instance.AutoAimToggle();
+    }
+
+    public void RumbleToggle(bool value)
+    {
+        var toggle = rumbleEnabledToggle.GetObject();
+        var slider = rumbleSensitivitySlider.GetObject();
+
+        Navigation nav = toggle.navigation;
+        if (value) {
+            rumbleSensitivitySlider.gameObject.SetActive(true);
+            nav.selectOnDown = slider;
+            toggle.navigation = nav;
+        } else {
+            rumbleSensitivitySlider.gameObject.SetActive(false);
+            nav.selectOnDown = rebindControlsButton;
+            toggle.navigation = nav;
+        }
+
+
+        SettingsManager.Instance.RumbleToggle();
     }
 
     #region Panel Switch Methods
