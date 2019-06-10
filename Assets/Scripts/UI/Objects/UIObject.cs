@@ -31,7 +31,11 @@ public class UIObject : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void ShowTooltip(Selectable obj)
     {
+        RectTransform rect = obj.GetComponent<RectTransform>();
+        Vector3[] v = new Vector3[4];
+        rect.GetWorldCorners(v);
+
         if (InputController.instance.IsControllerActive())
-            UITooltip.instance.ShowTooltipController(obj.GetComponent<RectTransform>().position, tooltipText);
+            UITooltip.instance.ShowTooltipController(v[3], tooltipText); //V[3] is the bottom right corner
     }
 }
