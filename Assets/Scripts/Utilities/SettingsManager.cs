@@ -27,6 +27,7 @@ public class SettingsManager : MonoBehaviour
     private int SUBTITLE_MIN_SIZE = 42;
     private int SUBTITLE_MAX_SIZE = 100;
     [SerializeField] private bool subtitleBackgroundEnabled = true;
+    [SerializeField] private bool subtitleColorEnabled = true;
 
     [Header("Auto-aim")]
     [SerializeField] private bool autoAimEnabled = false;

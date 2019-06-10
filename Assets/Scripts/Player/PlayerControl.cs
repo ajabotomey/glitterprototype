@@ -32,7 +32,7 @@ public class PlayerControl : MonoBehaviour
     }
 
     void RotateCharacter() {
-        if (InputController.instance.isControllerActive()) {
+        if (InputController.instance.IsControllerActive()) {
             var angle = InputController.instance.Rotation();
 
             if (angle == 0) {

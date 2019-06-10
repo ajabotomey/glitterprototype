@@ -25,29 +25,34 @@ public class InputController : MonoBehaviour
         instance = this;
         player = ReInput.players.GetPlayer(playerID);
 
-        // Retrieve input maps from Rewired
-        mouseMap = player.controllers.maps.GetMap(ControllerType.Mouse, 0, 1);
-        keyboardMap = player.controllers.maps.GetMap(ControllerType.Keyboard, 0, 0);
-        joystickMap = player.controllers.maps.GetMap(ControllerType.Joystick, 0, 2);
-
         // Check which input should be used.
         if (player.controllers.Joysticks.Count == 1) {
-            // By Default, disable the keyboard map if a controller is connected
-            keyboardMap.enabled = false;
-            mouseMap.enabled = false;
             joystick = player.controllers.Joysticks[0]; // Only ever be one joystick
         } else {
-            // If no controller is connected, then ensure that the keyboard are enabled
-            keyboardMap.enabled = true;
-            mouseMap.enabled = true;
             mouse = ReInput.controllers.Mouse;
             joystick = null;
         }
     }
 
-    public bool isControllerActive()
+    public bool IsControllerActive()
     {
-        return player.controllers.joystickCount == 1;
+        //return player.controllers.joystickCount == 1;
+        Controller controller = player.controllers.GetLastActiveController();
+        if (controller != null) {
+            switch (controller.type) {
+                case ControllerType.Keyboard:
+                    return false;
+                case ControllerType.Joystick:
+                    return true;
+                case ControllerType.Mouse:
+                    return false;
+                case ControllerType.Custom:
+                    // Do something custom controller
+                    break;
+            }
+        }
+
+        return false;
     }
 
     public Vector2 MousePosition()

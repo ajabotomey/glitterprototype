@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
 
         if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Player") {
             collision.gameObject.GetComponent<EntityHealth>().ApplyDamage(damage);
+            InputController.instance.SetRumble(1.0f);
         }
 
         Destroy(gameObject);

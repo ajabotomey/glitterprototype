@@ -1,22 +1,15 @@
-﻿using System.Collections;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIDropdown : MonoBehaviour
+public class UIDropdown : UIObject
 {
     [SerializeField] private Dropdown dropdown;
     private string currentValue;
 
-    // Start is called before the first frame update
-    void Awake()
-    {
-        dropdown.ClearOptions();
-    }
-
     public void SetOptions(List<string> options)
     {
+        dropdown.ClearOptions();
         dropdown.AddOptions(options);
         currentValue = options[0];
     }

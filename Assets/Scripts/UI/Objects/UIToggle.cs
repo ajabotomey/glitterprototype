@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
-public class UIToggle : MonoBehaviour
+public class UIToggle : UIObject
 {
     [SerializeField] private Toggle toggle;
-    
+
     public void SetValue(bool value)
     {
         toggle.isOn = value;
