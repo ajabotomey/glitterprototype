@@ -16,4 +16,9 @@ public class PauseMenu : MonoBehaviour
 
         gameObject.SetActive(false);
     }
+
+    public void QuitGame()
+    {
+        SceneController.instance.LoadMainMenu();
+    }
 }

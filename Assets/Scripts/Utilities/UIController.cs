@@ -17,13 +17,13 @@ public class UIController : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null) {
+        //if (instance == null) {
             instance = this;
-            DontDestroyOnLoad(gameObject);
-        } else {
-            DestroyImmediate(gameObject);
-            return;
-        }
+        //    DontDestroyOnLoad(gameObject);
+        //} else {
+        //    DestroyImmediate(gameObject);
+        //    return;
+        //}
     }
 
     // Start is called before the first frame update
