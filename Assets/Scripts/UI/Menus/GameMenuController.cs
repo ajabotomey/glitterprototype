@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Controlling the various menus within the main menu
-public class MenuController : MonoBehaviour
+// To Control the various menus in game
+public class GameMenuController : MonoBehaviour
 {
-    public static MenuController instance = null;
+    public static GameMenuController instance = null;
 
-    [SerializeField] private MainMenu mainMenu;
+    [SerializeField] private PauseMenu pauseMenu;
     [SerializeField] private SettingsMenu settingsMenu;
     [SerializeField] private GameObject controlMapperWindow;
+
+    // TODO: Setup ControlMapper to work with persistant Input Manager
 
     void Awake()
     {
@@ -20,21 +22,32 @@ public class MenuController : MonoBehaviour
             return;
         }
 
-        mainMenu.gameObject.SetActive(true);
+        pauseMenu.gameObject.SetActive(false);
         settingsMenu.gameObject.SetActive(false);
         controlMapperWindow.SetActive(false);
     }
 
-    public void SwapToMainMenu()
+    void Update()
     {
-        mainMenu.gameObject.SetActive(true);
+        if (InputController.instance.Pause()) {
+            SwapToPauseMenu();
+            Time.timeScale = 0f;
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        }
+
+        Cursor.visible = true;
+    }
+
+    public void SwapToPauseMenu()
+    {
+        pauseMenu.gameObject.SetActive(true);
         settingsMenu.gameObject.SetActive(false);
     }
 
     public void SwapToSettingsMenu()
     {
         settingsMenu.gameObject.SetActive(true);
-        mainMenu.gameObject.SetActive(false);
+        pauseMenu.gameObject.SetActive(false);
         controlMapperWindow.SetActive(false);
     }
 

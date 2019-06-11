@@ -92,9 +92,16 @@ public class SettingsMenu : MonoBehaviour
             // If settings have changed
                 // Show dialog box asking to save changes
             // else 
-                // Go back to main menu
+                // If Main Menu
+                    // Go back to main menu
+                // else
+                    // Go back to pause menu
 
-            MenuController.instance.SwapToMainMenu();
+            if (SceneController.instance.IsInGame()) {
+
+            } else {
+                MenuController.instance.SwapToMainMenu();
+            }
         }
     }
 

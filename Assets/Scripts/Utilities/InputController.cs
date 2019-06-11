@@ -24,12 +24,14 @@ public class InputController : MonoBehaviour
     {
         instance = this;
         player = ReInput.players.GetPlayer(playerID);
+        
+        if (player.controllers.Mouse.isConnected)
+            mouse = ReInput.controllers.Mouse;
 
         // Check which input should be used.
         if (player.controllers.Joysticks.Count == 1) {
             joystick = player.controllers.Joysticks[0]; // Only ever be one joystick
         } else {
-            mouse = ReInput.controllers.Mouse;
             joystick = null;
         }
     }
@@ -114,5 +116,10 @@ public class InputController : MonoBehaviour
     public bool UICancel()
     {
         return player.GetButton("UICancel");
+    }
+
+    public bool Pause()
+    {
+        return player.GetButton("Pause");
     }
 }

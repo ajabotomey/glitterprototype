@@ -43,6 +43,8 @@ public class UIController : MonoBehaviour
         SettingsManager.Instance.UpdateFont();
     }
 
+
+    // TODO: TO BE REMOVED
     public void StartGame() {
         warningFrame.SetActive(false);
         EnemyController.instance.TurnOnFovVisualisation();
@@ -52,6 +54,7 @@ public class UIController : MonoBehaviour
         isInMenu = false;
     }
 
+    // TODO: TO BE REMOVED
     public void Died() {
         diedFrame.SetActive(true);
         controlFrame.SetActive(false);
@@ -61,10 +64,13 @@ public class UIController : MonoBehaviour
         isInMenu = true;
     }
 
+
+    // TODO: TO BE REMOVED
     public void RestartGame() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    // TODO: TO BE REMOVED
     public void QuitGame() {
 #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
         Debug.Log(this.name + " : " + this.GetType() + " : " + System.Reflection.MethodBase.GetCurrentMethod().Name);
