@@ -33,6 +33,7 @@ public class GameMenuController : MonoBehaviour
             SwapToPauseMenu();
             Time.timeScale = 0f;
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+            EnemyController.instance.TurnOffFovVisualisation();
         }
 
         Cursor.visible = true;
