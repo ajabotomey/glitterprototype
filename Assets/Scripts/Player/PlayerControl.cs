@@ -75,4 +75,18 @@ public class PlayerControl : MonoBehaviour
             UIController.instance.Died();
         }
     }
+
+    public int GetHealth() {
+        return health.GetHealth();
+    }
+
+    public int GetMaxHealth()
+    {
+        return health.GetMaxHealth();
+    }
+
+    public void SetHealth(int healthValue, int maxHealth)
+    {
+        health.SetHealth(healthValue, maxHealth);
+    }
 }

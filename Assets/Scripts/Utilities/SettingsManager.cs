@@ -17,7 +17,7 @@ public class SettingsManager : MonoBehaviour
     private int TEXT_SIZE_MAX = 100;
 
     [Header("Game Speed")]
-    [SerializeField][Range(10, 100)] private float slowdownFactor = 100;
+    [SerializeField][Range(10, 100)] private float gameSpeed = 100;
     private int GAME_SPEED_MIN = 10; // 10% speed
     private int GAME_SPEED_MAX = 100; // 100% Speed
 
@@ -94,7 +94,7 @@ public class SettingsManager : MonoBehaviour
 
     public float CurrentGameSpeed()
     {
-        return slowdownFactor;
+        return gameSpeed;
     }
 
     public List<string> ResolutionsSupported()
@@ -164,7 +164,7 @@ public class SettingsManager : MonoBehaviour
     public void GameSpeedToggle(int value)
     {
         if (value >= GAME_SPEED_MIN && value <= GAME_SPEED_MAX)
-            slowdownFactor = value;
+            gameSpeed = value;
     }
 
     public void DyslexicToggle()
@@ -187,6 +187,11 @@ public class SettingsManager : MonoBehaviour
         screenHeight = Int32.Parse(values[1]);
 
         Screen.SetResolution(screenWidth, screenHeight, fullscreenEnabled);
+    }
+
+    public void SetResolution(int width, int height)
+    {
+        Screen.SetResolution(width, height, fullscreenEnabled);
     }
 
     public void FullScreenToggle()
@@ -240,31 +245,31 @@ public class SettingsManager : MonoBehaviour
 
     #endregion
 
-    // Write to PlayerPrefs for the moment, then when the player saves, write to save file
+    // Save settings in settings menu but also when player saves the game
     public void SaveSettings()
     {
-        // Apply Changed
-        UpdateFont();
-
-        PlayerPrefs.SetFloat("Game Speed", slowdownFactor);
-        PlayerPrefs.SetString("Dyslexic Font", dyslexicTextEnabled.ToString());
-        PlayerPrefs.SetString("Fullscreen", fullscreenEnabled.ToString());
-        PlayerPrefs.SetInt("Width", screenWidth);
-        PlayerPrefs.SetInt("Height", screenHeight);
-        PlayerPrefs.SetString("Auto-aim", autoAimEnabled.ToString());
-        PlayerPrefs.SetInt("Auto-aim Strength", autoAimStrength);
+        SaveSystem.SaveSettings();
     }
 
-    // Load from PlayerPrefs for the moment until the save system is properly working
+    // Load settings upon loading the game
     public void LoadSettings()
     {
-        slowdownFactor = PlayerPrefs.GetFloat("Game Speed");
-        dyslexicTextEnabled = Boolean.Parse(PlayerPrefs.GetString("Dyslexic Font"));
-        fullscreenEnabled = Boolean.Parse(PlayerPrefs.GetString("Fullscreen"));
-        screenWidth = PlayerPrefs.GetInt("Width");
-        screenHeight = PlayerPrefs.GetInt("Height");
-        autoAimEnabled = Boolean.Parse(PlayerPrefs.GetString("Auto-aim"));
-        autoAimStrength = PlayerPrefs.GetInt("Auto-aim Strength");
+        SettingsData data = SaveSystem.LoadSettings();
+
+        this.gameSpeed = data.gameSpeed;
+        this.autoAimEnabled = data.autoAimEnabled;
+        this.autoAimStrength = data.autoAimStrength;
+        this.dyslexicTextEnabled = data.dyslexicTextEnabled;
+        this.screenWidth = data.windowWidth;
+        this.screenHeight = data.windowHeight;
+        this.fullscreenEnabled = data.fullscreenEnabled;
+        this.inputSensitivity = data.inputSensitivity;
+        this.rumbleEnabled = data.rumbleEnabled;
+        this.rumbleSensitivity = data.rumbleSensitivity;
+
+        // Change resolution immediately
+        SetResolution(screenWidth, screenHeight);
+        UpdateFont();
     }
 
     public void UpdateFont()

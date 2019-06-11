@@ -19,6 +19,17 @@ public class EntityHealthBar : MonoBehaviour
         height = foreground.localScale.y;
     }
 
+    public void Init(int health, int maxHealth)
+    {
+        this.health = health;
+        this.maxHealth = maxHealth;
+        maxWidth = foreground.localScale.x;
+        height = foreground.localScale.y;
+
+        var damage = maxHealth - health;
+        TakeDamage(damage);
+    }
+
     public void TakeDamage(int damage)
     {
         health -= damage;

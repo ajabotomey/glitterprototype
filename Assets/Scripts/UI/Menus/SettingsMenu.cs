@@ -107,6 +107,8 @@ public class SettingsMenu : MonoBehaviour
 
     public void ApplyChanges()
     {
+        // Throw up a dialog box asking if you wish to save those changes
+
         SettingsManager.Instance.SetResolution(resolutionDropdown.GetValue());
         SettingsManager.Instance.SaveSettings();
     }
