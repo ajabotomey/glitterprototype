@@ -15,8 +15,8 @@ public class UnityBuild
     private static readonly bool IsDevelopmentBuild = true;
     private static readonly Dictionary<BuildTarget, PlatformBuilds> PlatformToBuild = new Dictionary<BuildTarget, PlatformBuilds>() {
         { BuildTarget.StandaloneWindows64,      new PlatformBuilds(BuildWindows, true) },
-        { BuildTarget.StandaloneLinuxUniversal, new PlatformBuilds(BuildLinux,   true) },
-        { BuildTarget.StandaloneOSX,            new PlatformBuilds(BuildMacOS,   true) },
+        { BuildTarget.StandaloneLinuxUniversal, new PlatformBuilds(BuildLinux,   false) },
+        { BuildTarget.StandaloneOSX,            new PlatformBuilds(BuildMacOS,   false) },
         { BuildTarget.Android,                  new PlatformBuilds(BuildAndroid, false) },
         { BuildTarget.iOS,                      new PlatformBuilds(BuildiOS,     false) },
         { BuildTarget.WebGL,                    new PlatformBuilds(BuildWebGL,   true) },
