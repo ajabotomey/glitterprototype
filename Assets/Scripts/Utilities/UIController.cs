@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
@@ -11,19 +10,15 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject controlFrame;
     [SerializeField] private GameObject weaponWheel;
 
+    [SerializeField] private GameObject screenshotText;
+
     public static UIController instance = null;
 
     public bool isInMenu = true;
 
     void Awake()
     {
-        //if (instance == null) {
-            instance = this;
-        //    DontDestroyOnLoad(gameObject);
-        //} else {
-        //    DestroyImmediate(gameObject);
-        //    return;
-        //}
+        instance = this;
     }
 
     // Start is called before the first frame update
@@ -41,6 +36,10 @@ public class UIController : MonoBehaviour
     void Update()
     {
         SettingsManager.Instance.UpdateFont();
+
+        if (InputController.instance.TakeScreenshot()) {
+            ScreenshotManager.instance.TakeScreenshot(true);
+        }
     }
 
 
@@ -114,5 +113,17 @@ public class UIController : MonoBehaviour
     {
         weaponWheel.SetActive(false);
         WeaponControl.instance.SelectMask();
+    }
+
+    public void ScreenshotSuccessful()
+    {
+        StartCoroutine(ScreenshotTimer());
+    }
+
+    IEnumerator ScreenshotTimer()
+    {
+        screenshotText.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        screenshotText.SetActive(false);
     }
 }

@@ -115,11 +115,16 @@ public class InputController : MonoBehaviour
 
     public bool UICancel()
     {
-        return player.GetButton("UICancel");
+        return player.GetButtonDown("UICancel");
     }
 
     public bool Pause()
     {
-        return player.GetButton("Pause");
+        return player.GetButtonDown("Pause");
+    }
+
+    public bool TakeScreenshot()
+    {
+        return player.GetButtonDown("Screenshot");
     }
 }

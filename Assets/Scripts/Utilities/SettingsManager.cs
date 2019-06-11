@@ -147,6 +147,16 @@ public class SettingsManager : MonoBehaviour
         return rumbleSensitivity;
     }
 
+    public int GetWindowWidth()
+    {
+        return screenWidth;
+    }
+
+    public int GetWindowHeight()
+    {
+        return screenHeight;
+    }
+
     #endregion
 
     #region Mutator Methods
