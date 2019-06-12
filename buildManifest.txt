@@ -1,0 +1,4 @@
+ProductName="Glitter Prototype"
+CompanyName="Killerbyte Workshop"
+Version=0.0.0.1
+BuildLocation="./Build/Windows/0.0.0.1"

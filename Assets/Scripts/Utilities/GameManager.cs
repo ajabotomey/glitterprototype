@@ -6,12 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    // Stores all behaviours for the various AI entities
-    public Blackboard m_blackboard;
-
     void Awake() {
         instance = this;
-        m_blackboard = new Blackboard();
     }
 
     // Start is called before the first frame update

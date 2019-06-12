@@ -305,8 +305,6 @@ GameObject:
   - component: {fileID: 398684859794407934}
   - component: {fileID: 183592399099156507}
   - component: {fileID: 8393856167443883884}
-  - component: {fileID: 316483317315978234}
-  - component: {fileID: 2330656537533149962}
   - component: {fileID: 478863961}
   - component: {fileID: 478863962}
   - component: {fileID: 478863963}
@@ -402,49 +400,6 @@ MonoBehaviour:
   edgeDstThreshold: 0.5
   viewMeshFilter: {fileID: 8022805804081022527}
   viewMeshRenderer: {fileID: 2259943912666298513}
---- !u!114 &316483317315978234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8393856167443883883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae242b6d0713cda4ea0110bf0aae43d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 398684859794407934}
-  movement: {x: 0, y: 0, z: 0}
---- !u!114 &2330656537533149962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8393856167443883883}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb6fb29adb5f835478ec9a6230d5756c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_player: {fileID: 0}
-  m_agent: {fileID: 316483317315978234}
-  points:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  viewRadius: 5
-  viewAngle: 90
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 256
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 512
-  stopRange: 10
-  speed: 5
 --- !u!114 &478863961
 MonoBehaviour:
   m_ObjectHideFlags: 0

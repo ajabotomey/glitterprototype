@@ -1,0 +1,37 @@
+
+LICENSE SYSTEM [2019612 21:33:20] Next license update check is after 2019-06-13T08:57:55
+
+
+LICENSE SYSTEM [2019612 21:33:20] 00326-10024-03105-AA259 != 00326-10024-03105-AA248
+
+Built from '2019.1/staging' branch; Version is '2019.1.0f2 (292b93d75a2c) revision 2698131'; Using compiler version '191627012'
+OS: 'Windows 10  (10.0.0) 64bit' Language: 'en' Physical Memory: 32650 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+[Package Manager] Server::Start -- Port 52742 was selected
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2019.1.0f2\Editor\Unity.exe
+-quit
+-batchmode
+-executeMethod
+BuildHelper.Windows
+-logfile
+C:\Users\kille\Desktop\glitterprototype\build\editor.log
+C:/Users/kille/C:/Users/kille/Desktop/glitterprototype -quit -nographics -batchmode -logFile "C:/Users/kille/Desktop/glitterprototype/Logs/UnityEditor.log
+Using Asset Import Pipeline V1.
+DisplayProgressbar: Unity Package Manager
+Loading GUID <-> Path mappings...0.000082 seconds
+Loading Asset Database...0.018073 seconds
+AssetDatabase consistency checks...0.033402 seconds
+CreateDirectory 'C:/Users/kille/C:' failed: The filename, directory name, or volume label syntax is incorrect.
+ (current dir: C:/Users/kille/Desktop/glitterprototype)
+[PackageManager] Could not create file at: C:/Users/kille/C:/Users/kille/Desktop/glitterprototype -quit -nographics -batchmode -logFile "C:/Users/kille/Desktop/glitterprototype/Logs/UnityEditor.log/Packages/manifest.json
+
+ 
+(Filename: C:\buildslave\unity\build\Modules/PackageManager/Editor/PackageManagerProjectManifest.cpp Line: 66)
+
+[Package Manager] Done resolving packages in 0.07s seconds
+Failed to resolve packages: The file [C:\Users\kille\C:\Users\kille\Desktop\glitterprototype -quit -nographics -batchmode -logFile "C:\Users\kille\Desktop\glitterprototype\Logs\UnityEditor.log\Packages\manifest.json] cannot be found. No packages loaded.
+
+A re-import of the project may be required to fix the issue or a manual modification of C:/Users/kille/C:/Users/kille/Desktop/glitterprototype -quit -nographics -batchmode -logFile "C:/Users/kille/Desktop/glitterprototype/Logs/UnityEditor.log/Packages/manifest.json file.
+Exiting without the bug reporter. Application will terminate with return code 1
