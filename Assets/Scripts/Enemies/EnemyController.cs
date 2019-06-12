@@ -17,6 +17,11 @@ public class EnemyController : MonoBehaviour
         get; set;
     }
 
+    public FieldOfView[] GetEnemies()
+    {
+        return enemies;
+    }
+
     void Start() {
         instance = this;
     }
