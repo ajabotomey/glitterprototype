@@ -1,6 +1,6 @@
 @echo off
 
-SET BUILDLOCATION="./Build/%TARGET%/%VERSION%"
+SET BUILDLOCATION="./Build/Windows/0.0.0.1"
 
 rd %BUILDLOCATION% /q
 mkdir %BUILDLOCATION%
