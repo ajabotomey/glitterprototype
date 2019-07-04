@@ -9,6 +9,9 @@ public class GunControl : MonoBehaviour
     [SerializeField] private LayerMask obstacleMask;
     [SerializeField] private LayerMask targetMask;
 
+    [Tooltip("Accuracy of the gun")][SerializeField] private int accuracy = 80;
+    private int MAX_ACCURACY = 100;
+
     private float elapsedTime;
 
     // Start is called before the first frame update
@@ -25,14 +28,7 @@ public class GunControl : MonoBehaviour
             return;
 
         if (WeaponControl.instance.CurrentWeapon == WeaponControl.WeaponState.GUN) {
-            bool fireBullet = InputController.instance.FireWeapon();
-
-            if (fireBullet && elapsedTime >= fireRate) {
-                GameObject firedBullet = Instantiate(bullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-                firedBullet.GetComponent<Rigidbody2D>().AddForce(transform.up * 500.0f);
-
-                elapsedTime = 0.0f;
-            }
+            FireGun();
         }
 
         elapsedTime += Time.deltaTime;
@@ -43,7 +39,7 @@ public class GunControl : MonoBehaviour
         if (SettingsManager.Instance.IsAutoAimEnabled()) {
             var autoAimStrength = SettingsManager.Instance.GetAutoAimStrength();
             var direction = bulletSpawnPoint.transform.rotation * Vector2.up;
-            var target = lookForEnemyWithThickRaycast(bulletSpawnPoint.transform.position, direction, autoAimStrength);
+            var target = LookForEnemyWithThickRaycast(bulletSpawnPoint.transform.position, direction, autoAimStrength);
 
             if (target) {
                 // Snap the entire rotation of the character to that 
@@ -52,7 +48,19 @@ public class GunControl : MonoBehaviour
         }
     }
 
-    public Transform lookForEnemyWithThickRaycast(Vector2 startWorldPos, Vector2 direction, float visibilityThickness)
+    private void FireGun()
+    {
+        bool fireBullet = InputController.instance.FireWeapon();
+
+        if (fireBullet && elapsedTime >= fireRate) {
+            GameObject firedBullet = Instantiate(bullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+            firedBullet.GetComponent<Rigidbody2D>().AddForce(transform.up * 500f);
+
+            elapsedTime = 0.0f;
+        }
+    }
+
+    public Transform LookForEnemyWithThickRaycast(Vector2 startWorldPos, Vector2 direction, float visibilityThickness)
     {
         if (visibilityThickness == 0) return null; //aim assist disabled
  
@@ -76,7 +84,7 @@ public class GunControl : MonoBehaviour
  
             RaycastHit2D hit = Physics2D.Raycast(startPos, flaredDirection, castDistance, targetMask);
             Debug.DrawRay(startPos, flaredDirection * castDistance, Color.yellow, Time.deltaTime);
-            if (hit && isInTargetLayer(hit.collider.gameObject.layer))
+            if (hit && IsInTargetLayer(hit.collider.gameObject.layer))
             {
                 //make sure it's in range
                 float distanceAwaySqr = (hit.transform.position.toVector2() - startWorldPos).sqrMagnitude;
@@ -92,7 +100,7 @@ public class GunControl : MonoBehaviour
         return target;
     }
 
-    private bool isInTargetLayer(int layer)
+    private bool IsInTargetLayer(int layer)
     {
         var targetLayer = (int)Mathf.Log(targetMask.value, 2);
 

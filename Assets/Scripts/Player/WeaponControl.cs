@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponControl : MonoBehaviour
+public class WeaponControl : MonoBehaviour, IWeaponControl
 {
     public static WeaponControl instance = null;
 
@@ -12,13 +12,14 @@ public class WeaponControl : MonoBehaviour
 
     public enum WeaponState { GUN, GRENADE, NOISE, MASK }
     public WeaponState CurrentWeapon { get; set; }
-    private int weaponCount = 0;
 
+    public int WeaponCount { get; set; }
+    
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
-        weaponCount = Enum.GetValues(typeof(WeaponState)).Length;
+        WeaponCount = Enum.GetValues(typeof(WeaponState)).Length;
     }
 
     // Update is called once per frame
@@ -38,14 +39,14 @@ public class WeaponControl : MonoBehaviour
         // Mouse scrollwheel input
         if (Input.GetAxis("Mouse ScrollWheel") > 0f) {
             if (CurrentWeapon == WeaponState.GUN)
-                CurrentWeapon = (WeaponState)(weaponCount - 1);
+                CurrentWeapon = (WeaponState)(WeaponCount - 1);
             else
                 CurrentWeapon--;
 
             SelectWeapon((int)CurrentWeapon);
         } else if (Input.GetAxis("Mouse ScrollWheel") < 0f) {
             int value = (int)CurrentWeapon;
-            if (value == weaponCount - 1)
+            if (value == WeaponCount - 1)
                 CurrentWeapon = WeaponState.GUN;
             else
                 CurrentWeapon++;

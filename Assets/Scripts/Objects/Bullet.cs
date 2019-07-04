@@ -3,8 +3,13 @@
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private int damage;
-    
+    private int damage;
+
+    public void Init(int newDamage)
+    {
+        damage = newDamage;
+    }
+
     void OnCollisionEnter2D(Collision2D collision) {
         rb.velocity = Vector2.zero;
 

@@ -74,12 +74,6 @@ public class SettingsManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    //void Update()
-    //{
-
-    //}
-
     #region Accessor Methods
 
     public bool IsDyslexicTextEnabled()

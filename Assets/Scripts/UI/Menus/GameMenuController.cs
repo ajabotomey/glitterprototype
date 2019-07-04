@@ -11,8 +11,6 @@ public class GameMenuController : MonoBehaviour
     [SerializeField] private SettingsMenu settingsMenu;
     [SerializeField] private GameObject controlMapperWindow;
 
-    // TODO: Setup ControlMapper to work with persistant Input Manager
-
     void Awake()
     {
         if (instance == null) {

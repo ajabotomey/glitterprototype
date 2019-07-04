@@ -48,10 +48,10 @@ public class EnemyGuardNav : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateState(currentState);
+        UpdateState();
     }
 
-    void UpdateState(FSMState currentState)
+    void UpdateState()
     {
         float distanceToPlayer = Vector2.Distance(player.transform.position, transform.position);
         agent.isStopped = false;
